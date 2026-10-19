@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>SkillGraph — Source-first research</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23121c28'/%3E%3Cpath d='M23 9H12a4 4 0 0 0 0 8h8a3 3 0 0 1 0 6H9' fill='none' stroke='%238ae0bd' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#workspace">Skip to content</a>
+  <header class="site-header">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">S<span>G</span></span><div><strong>SkillGraph<span class="brand-dot">.</span></strong><small>SOURCE-FIRST RESEARCH</small></div></div>
+    <nav class="tabs" aria-label="Main navigation"><button id="explore-tab" class="tab active" aria-current="page">Explore <span>01</span></button><button id="experiments-tab" class="tab">Experiments <span>02</span></button></nav>
+    <div class="local-state"><span class="status-dot"></span> LOCAL WORKSPACE</div>
+  </header>
+  <main id="workspace">
+    <section class="intro"><div><p class="eyebrow">THE EVIDENCE IS IN THE SOURCE</p><h1>Every skill has a source.<span> Every line has evidence.</span></h1><p class="intro-copy">Explore every imported occurrence, read versioned originals, and measure token payloads from real source data.</p></div><button id="open-catalog" class="button primary">Catalog payload <span aria-hidden="true">↗</span></button></section>
+    <div id="global-error" class="notice error" role="alert" hidden></div>
+    <section class="stats" aria-label="Imported corpus statistics"><div class="stat"><span>SKILL OCCURRENCES</span><strong id="stat-skills">—</strong><small>Every imported occurrence retained</small></div><div class="stat"><span>SOURCE REPOSITORIES</span><strong id="stat-repos">—</strong><small>Git commits and dataset snapshots distinguished</small></div><div class="stat"><span>SOURCE FILES</span><strong id="stat-files">—</strong><small id="stat-references">Includes supporting files and assets</small></div><div class="stat"><span>FILES WITH DIAGNOSTICS</span><strong id="stat-errors" class="amber">—</strong><small>Diagnostics remain visible</small></div></section>
+
+    <section id="explore-view" aria-label="Skill explorer">
+      <div class="workspace-bar"><div><span class="status-dot"></span><strong>Source explorer</strong><span class="muted">/</span><span class="muted">No hidden top-k filtering</span></div><span class="bar-note">PAGINATED CATALOG · VERSIONED LINES</span></div>
+      <div class="explorer-grid">
+        <aside class="panel catalog-panel" aria-label="Skill catalog"><div class="panel-title"><div><span class="step">01</span><h2>Catalog</h2></div><span id="catalog-total" class="badge">— skills</span></div>
+          <div class="catalog-controls"><label for="repository">Repository scope</label><select id="repository"><option value="">All imported repositories</option></select><p class="help">Every page preserves full names and descriptions. Selecting a repository explicitly changes the scope.</p></div>
+          <div class="list-meta"><span id="list-range" aria-live="polite">Loading entries…</span><span>30 / PAGE</span></div>
+          <div id="skill-list" class="skill-list" aria-label="Skills"></div>
+          <form id="list-pagination" class="pagination"><button id="list-prev" type="button" class="icon-button" aria-label="Previous catalog page" disabled>←</button><label for="list-page">Page</label><input id="list-page" type="number" min="1" value="1" aria-label="Catalog page number"><span id="list-pages">/ —</span><button class="text-button" type="submit">Go</button><button id="list-next" type="button" class="icon-button" aria-label="Next catalog page" disabled>→</button></form>
+        </aside>
+
+        <section class="panel source-panel" aria-label="Source document"><div class="panel-title"><div><span class="step">02</span><h2>Source</h2></div><span class="badge mint">READ ONLY</span></div>
+          <div class="source-heading"><div class="source-kind"><span id="source-kind">SKILL.MD</span><button id="source-back" class="text-button" hidden>← Previous file</button></div><h3 id="source-name">Select a skill to read its source</h3><p id="source-path" class="mono muted">—</p><div class="source-tags"><span id="source-version" class="tag">Version-pinned source</span><span id="source-encoding" class="tag">UTF-8 / binary metadata</span></div></div>
+          <div id="source-notice" class="notice source-notice" hidden></div>
+          <form id="source-navigation" class="source-navigation"><div><button id="source-prev" type="button" class="icon-button" aria-label="Previous source lines" disabled>←</button><span id="line-range" aria-live="polite">No source selected</span><button id="source-next" type="button" class="icon-button" aria-label="Next source lines" disabled>→</button></div><div><label for="jump-line">Go to line</label><input id="jump-line" type="number" min="1" value="1" disabled><button id="jump-button" class="text-button" type="submit" disabled>Go</button></div></form>
+          <div id="source-content" class="source-content" tabindex="0" aria-label="Numbered source lines"><div class="empty-state"><span class="empty-symbol">⌘</span><strong>Start with the catalog</strong><p>Read 200 original lines at a time, with the total shown.<br>Continue or jump to a heading without shortening the source.</p></div></div>
+          <div class="source-footer"><span>Sources are inspected as inert data</span><button id="copy-lines" class="text-button" disabled>Copy this source range</button></div>
+        </section>
+
+        <aside class="panel inspector-panel" aria-label="Evidence inspector"><div class="panel-title"><div><span class="step">03</span><h2>Evidence</h2></div><span class="tiny-diamond" aria-hidden="true">◇</span></div><div id="inspector" class="inspector-content"><div class="inspector-placeholder"><span class="eyebrow">TRACEABLE BY DESIGN</span><p>Every read identifies its file, snapshot, content hash, and original line range.</p><div class="trace-path"><span>Repository</span><i>↓</i><span>Commit snapshot</span><i>↓</i><span>File hash</span><i>↓</i><span>Source lines</span></div></div></div></aside>
+      </div>
+      <div class="workspace-footnote"><span class="footnote-number">↳</span><p>Complete inventory is distinct from complete reading. This viewer supports inspection; it does not establish AI receipt or comprehension.</p></div>
+    </section>
+
+    <section id="experiments-view" hidden aria-label="Research experiments"><div class="experiment-heading"><div><p class="eyebrow">MEASURE FIRST. CLAIM CAREFULLY.</p><h2>Payload experiments</h2><p>Measurements from imported sources, with explicit scope and experimental limitations.</p></div><button id="refresh-reports" class="button secondary">Refresh reports ↻</button></div><div id="report-content" aria-live="polite"></div></section>
+    <footer class="site-footer"><span>SkillGraph <span class="muted">/ Research workspace</span></span><span>Exact sources. Explicit scope. Reproducible evidence.</span></footer>
+  </main>
+  <dialog id="catalog-dialog" aria-labelledby="catalog-dialog-title"><div class="dialog-header"><div><p class="eyebrow">COMPLETE ENTRIES · EXPLICIT PAGES</p><h2 id="catalog-dialog-title">Catalog payload</h2></div><button id="close-catalog" class="icon-button" aria-label="Close catalog dialog">×</button></div><p class="dialog-intro">Export full names and descriptions as JSONL. Pages respect the token budget without splitting entries. Catalog metadata is distinct from full SKILL.md instructions.</p><form id="catalog-options" class="catalog-options"><div><label for="catalog-budget">Token budget / page</label><input id="catalog-budget" type="number" value="8000" min="1" step="1"></div><div><label for="catalog-format">Payload format</label><select id="catalog-format"><option value="compact">Compact handles</option><option value="full">Full IDs + hashes</option></select></div><div><span class="field-label">Scope</span><strong id="catalog-scope">—</strong></div><button class="button secondary" type="submit">Build first page</button></form><div id="catalog-status" class="notice" aria-live="polite"></div><pre id="catalog-preview" class="catalog-preview" tabindex="0"></pre><div class="dialog-footer"><div><button id="catalog-prev" class="button secondary" disabled>← Previous</button><button id="catalog-next" class="button secondary" disabled>Next →</button></div><button id="copy-catalog" class="button primary" disabled>Copy this page</button></div><p class="help">Compact handles such as s1 retain full names, descriptions, and paths. Resolve them through /api/resolve using the same catalogHash and repository scope. complete applies to a response containing the entire scope from the first entry. Pagination does not enlarge the model context window.</p></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "scope": "Exact commit-pinned repository panel used in the measured offline experiment.",
+  "limits": {
+    "maxArchiveBytes": 536870912,
+    "maxExpandedBytes": 209715200,
+    "maxTotalDataBytes": 4294967296
+  },
+  "repositories": [
+    {
+      "repository": "openai/skills",
+      "ref": "49f948faa9258a0c61caceaf225e179651397431",
+      "note": "Historical official skills catalog; imported alongside current plugins."
+    },
+    {
+      "repository": "anthropics/skills",
+      "ref": "dbd4588f9e1033efb41dad4bef2f7947c8993d44"
+    },
+    {
+      "repository": "vercel-labs/agent-skills",
+      "ref": "063bee94c3f4df8453406c830b0a7df0f2860278"
+    },
+    {
+      "repository": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "ref": "56ea9cf174ed86786187daa9de0e6247cb0747e4"
+    },
+    {
+      "repository": "openai/plugins",
+      "ref": "0722921d5542fc593105c27bd52630babd8b8c2a"
+    },
+    {
+      "repository": "alirezarezvani/claude-skills",
+      "ref": "19392f7a08264ed00486a251f5b2098321771f94"
+    },
+    {
+      "repository": "obra/superpowers",
+      "ref": "bb92a77741419a4ab5f06e711a283343f1ada0c3"
+    },
+    {
+      "repository": "microsoft/skills",
+      "ref": "8850874f66fb4d905bfcfcb923a18883bb70d1cd"
+    },
+    {
+      "repository": "zhaoxuya520/reverse-skill",
+      "ref": "cab634bd855fc287f6e420c1f36fd1a6b9245960"
+    },
+    {
+      "repository": "sickn33/antigravity-awesome-skills",
+      "ref": "c808e6e480696d243e0668ebbc3499bb8e7e10a4",
+      "maxExpandedBytes": 402653184,
+      "note": "Measured expanded pinned snapshot 329,534,444 bytes; scoped 384 MiB limit preserves all regular repository files."
+    },
+    {
+      "repository": "affaan-m/everything-claude-code",
+      "ref": "76aaa77df6adc5b889e689007bf99b9a4f74af34"
+    }
+  ],
+  "optionalDatasets": [
+    {
+      "name": "GitSkills sample",
+      "repository": "giuseppedestefanis/gitskills-sample",
+      "url": "https://github.com/giuseppedestefanis/gitskills-sample",
+      "import": "node scripts/import-gitskills.ts --download",
+      "automaticDownload": true,
+      "repositoryRevision": "fff3df93beeee51a5444450891751f143e38da3e",
+      "maxArchiveBytes": 536870912,
+      "maxExpandedBytes": 536870912,
+      "reason": "User-authorized bounded public sample only: 86,721,947-byte pinned ZIP, approximately 277 MB SQLite, all 29,786 occurrences. Full dataset is outside this run."
+    }
+  ]
+}

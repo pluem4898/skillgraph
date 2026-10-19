@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "scope": "All regular files in bounded commit-pinned snapshots of the listed repositories; this is not all skills on GitHub.",
+  "limits": { "maxArchiveBytes": 536870912, "maxExpandedBytes": 209715200, "maxTotalDataBytes": 4294967296 },
+  "repositories": [
+    { "repository": "zhaoxuya520/reverse-skill", "ref": "HEAD" },
+    { "repository": "openai/skills", "ref": "HEAD", "note": "Historical official skills catalog; imported alongside current plugins." },
+    { "repository": "anthropics/skills", "ref": "HEAD" },
+    { "repository": "vercel-labs/agent-skills", "ref": "HEAD" },
+    { "repository": "nextlevelbuilder/ui-ux-pro-max-skill", "ref": "HEAD" },
+    { "repository": "openai/plugins", "ref": "HEAD" },
+    { "repository": "sickn33/antigravity-awesome-skills", "ref": "HEAD", "maxExpandedBytes": 402653184, "note": "Measured expanded pinned snapshot 329,534,444 bytes; scoped 384 MiB limit preserves all regular repository files." },
+    { "repository": "alirezarezvani/claude-skills", "ref": "HEAD" },
+    { "repository": "affaan-m/everything-claude-code", "ref": "HEAD" },
+    { "repository": "obra/superpowers", "ref": "HEAD" },
+    { "repository": "microsoft/skills", "ref": "HEAD" }
+  ],
+  "optionalDatasets": [
+    {
+      "name": "GitSkills sample",
+      "repository": "giuseppedestefanis/gitskills-sample",
+      "url": "https://github.com/giuseppedestefanis/gitskills-sample",
+      "import": "node scripts/import-gitskills.ts --download",
+      "automaticDownload": true,
+      "repositoryRevision": "fff3df93beeee51a5444450891751f143e38da3e",
+      "maxArchiveBytes": 536870912,
+      "maxExpandedBytes": 536870912,
+      "reason": "User-authorized bounded public sample only: 86,721,947-byte pinned ZIP, approximately 277 MB SQLite, all 29,786 occurrences. Full dataset is outside this run."
+    }
+  ]
+}

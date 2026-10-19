@@ -1,0 +1,20 @@
+node_modules/
+data/
+*.log
+.env*
+!.env.example
+
+# Local manuscript and research protocol: never include in ordinary Git adds.
+/research/
+
+# Downloaded corpus and generated research artifacts remain local.
+/reports/
+
+# Local databases, archives, and generated document artifacts.
+*.sqlite*
+*.db
+*.zip
+*.docx
+*.pdf
+*.pem
+*.key
