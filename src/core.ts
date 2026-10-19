@@ -317,6 +317,31 @@ export class SkillStore {
     return metadata;
   }
 
+  /** Resolve and read atomically at the interface, without sending an outline or
+   * package inventory merely to locate a known relative reference. */
+  openHandle(handle: string, catalogHash: string, options: { repository?: string; reference?: string; start?: number; end?: number } = {}) {
+    const selected = this.resolveHandle(handle, catalogHash, options.repository);
+    let file = selected;
+    if (options.reference !== undefined) {
+      const relative = pathInRepository(options.reference);
+      const path = posix.join(selected.packagePath, relative);
+      let offset = 0;
+      let found: SkillMetadata | undefined;
+      do {
+        const page = this.listFiles({ repository: selected.repository, packagePath: selected.packagePath, offset, limit: 100 });
+        found = page.items.find(item => item.path === path && item.commit === selected.commit);
+        if (found || page.nextOffset === null) break;
+        offset = page.nextOffset;
+      } while (true);
+      if (!found) throw new SkillStoreError('FILE_NOT_FOUND', 'Reference is not present in the selected immutable package', { path });
+      file = found;
+    }
+    const lines = this.readLines(file.id, options.start ?? 1, options.end ?? file.totalLines, file.hash);
+    return { repository: file.repository, commit: file.commit, path: file.path, hash: file.hash,
+      startLine: lines.startLine, endLine: lines.endLine, totalLines: lines.totalLines,
+      utf8Bytes: Buffer.byteLength(lines.text, 'utf8'), errors: file.errors, text: lines.text };
+  }
+
   private catalogPage(options: { repository?: string; offset?: number; maxTokens?: number }, compact: boolean): CatalogPage {
     const offset = nonnegative(options.offset ?? 0, 'offset');
     if (options.maxTokens !== undefined && (!Number.isSafeInteger(options.maxTokens) || options.maxTokens < 1)) {

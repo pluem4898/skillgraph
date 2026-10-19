@@ -25,6 +25,9 @@ Run from the project directory (Node 24+):
   node src/cli.ts catalog --maxTokens 8000 --offset 0 [--repository owner/repo]
   node src/cli.ts catalog --offset NEXT --catalogHash HASH [--repository owner/repo]
   node src/cli.ts resolve --handle s1 --catalogHash HASH [--repository owner/repo]
+  node src/cli.ts catalog --wire text [--repository owner/repo]
+  node src/cli.ts open --handle s1 --catalogHash HASH --wire text [--repository owner/repo]
+  node src/cli.ts open --handle s1 --catalogHash HASH --reference examples/guide.md --wire text
   node src/cli.ts inspect --file FILE_ID
   node src/cli.ts files --repository owner/repo --package path/to/skill --offset 0
   node src/cli.ts read --file FILE_ID --start 1 --end 100 --hash SHA256
@@ -44,6 +47,12 @@ Catalog/CLI is data access, not permission to execute downloaded skill scripts.`
       const page = options.format === 'full' ? db.catalog(pageOptions) : db.compactCatalog(pageOptions);
       if (options.catalogHash && options.catalogHash !== page.catalogHash) throw Object.assign(new Error('Catalog changed; restart enumeration from offset 0.'), { code: 'STALE_CATALOG' });
       result = page;
+    } else if (command === 'open') {
+      result = db.openHandle(options.handle || '', options.catalogHash || '', {
+        repository: options.repository, reference: options.reference,
+        start: options.start === undefined ? undefined : Number(options.start),
+        end: options.end === undefined ? undefined : Number(options.end),
+      });
     } else if (command === 'resolve') {
       result = db.resolveHandle(options.handle || '', options.catalogHash || '', options.repository);
     } else if (command === 'files') {
@@ -55,7 +64,15 @@ Catalog/CLI is data access, not permission to execute downloaded skill scripts.`
       const { text, numberedText, ...receipt } = db.readLines(options.file || '', Number(options.start || 1), Number(options.end), options.hash);
       result = options.numbered === 'true' ? { ...receipt, numberedText } : { ...receipt, text };
     } else throw Object.assign(new Error(`Unknown command: ${command}`), { code: 'INVALID_COMMAND' });
-    console.log(JSON.stringify(result));
+    if (options.wire === 'text') {
+      if (command === 'catalog') {
+        const page = result as ReturnType<SkillStore['compactCatalog']>;
+        process.stdout.write(JSON.stringify({ catalogHash: page.catalogHash, offset: page.offset, returned: page.returned, total: page.total, nextOffset: page.nextOffset, format: page.format }) + '\n' + page.text);
+      } else if (command === 'open') {
+        const { text, ...receipt } = result as ReturnType<SkillStore['openHandle']>;
+        process.stdout.write(JSON.stringify(receipt) + '\n' + text);
+      } else throw Object.assign(new Error('--wire text is supported for catalog and open only.'), { code: 'INVALID_ARGUMENT' });
+    } else console.log(JSON.stringify(result));
   } catch (error) {
     const e = error as Error & { code?: string; details?: Record<string, unknown> };
     console.error(JSON.stringify({ error: e.code || 'ERROR', message: e.message, details: e.details })); process.exitCode = 1;

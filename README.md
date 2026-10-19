@@ -44,6 +44,29 @@ node src/cli.ts read --file FILE_ID --start 10 --end 50 --hash CONTENT_HASH --nu
 
 Original source bytes, line endings, and line coordinates are preserved. Binary or malformed skills remain listed with diagnostics. Metadata resolution and exact body reads are separate, reducing repeated discovery identifiers. Downloaded skills are inspected as data; importing does not install them or run their scripts.
 
+## Lower-overhead source access
+
+Prefer a raw text wire and a combined resolve/read when selecting an original skill:
+
+```powershell
+node src/cli.ts catalog --repository OWNER/REPO --wire text --maxTokens 8000
+node src/cli.ts open --repository OWNER/REPO --handle s1 --catalogHash DIGEST --wire text
+node src/cli.ts open --repository OWNER/REPO --handle s1 --catalogHash DIGEST --reference examples/guide.md --wire text
+```
+
+Catalog text wire returns a JSON page receipt followed by unescaped JSONL entries. Source text wire returns a JSON provenance receipt followed by exact original bytes, including original line endings. Verify `utf8Bytes` before treating a source response as complete. `open` defaults to the whole selected file; optional `--start` and `--end` address original line ranges. Known references stay within the selected package and commit. Old JSON commands remain supported; `resolve` is useful when headings and resolved links are actually needed.
+
+On the three-task local pilot, rerunning real CLI access while preserving identical source and reference text produced:
+
+| Task | Earlier SkillGraph | Optimized SkillGraph | Direct-file index baseline |
+|---|---:|---:|---:|
+| Brand CSS | 3,675 | 3,080 | 2,971 |
+| Weekly update with reference | 5,605 | 3,729 | 3,586 |
+| Form repair | 3,981 | 3,450 | 3,365 |
+| Total | 13,261 | 10,259 | 9,922 |
+
+These are separately encoded skill-data response tokens using o200k_base, not total model usage. The optimized total is 22.64% smaller than the earlier SkillGraph path and still 3.40% above the direct-file baseline. The output artifacts passed 34 final acceptance checks per arm in the preceding single-agent pilot. This optimization replay verified exact guide/reference equality and does not constitute independent model A/B evaluation or a new task-quality experiment. Current software validation passes 29 tests, including commit-pinned direct reference reads and exact text-wire CLI bytes.
+
 ## Measured corpus
 
 The locally measured corpus contains 40,545 skill occurrences from 11,848 repository names, combining eleven commit-pinned GitHub repositories with a bounded GitSkills sample. It is not bundled with this repository and is not all GitHub. There are 40,541 readable token-study targets, 98,460 total file occurrences, and 60,418 distinct stored blobs.
