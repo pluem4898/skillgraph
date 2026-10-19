@@ -302,6 +302,11 @@ export class SkillStore {
     return this.catalogPage(options, false);
   }
 
+  catalogState(repository?: string) {
+    const snapshot = this.snapshotForRepository(repository);
+    return { catalogHash: snapshot.hash, total: snapshot.ids.length };
+  }
+
   /** Reversible handles remove repeated hashes, while all discovery text stays exact. */
   compactCatalog(options: { repository?: string; offset?: number; maxTokens?: number } = {}): CatalogPage {
     return this.catalogPage(options, true);

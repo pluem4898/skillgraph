@@ -48,5 +48,24 @@ test('text-wire CLI returns a verifiable receipt and exact unescaped original by
     assert.equal(receipt.path, 'p/SKILL.md');
     assert.equal(receipt.utf8Bytes, Buffer.byteLength(source));
     assert.equal(opened.slice(split + 1), source);
+    const lean = cli(['open', '--handle', 's1', '--catalogHash', envelope.catalogHash, '--wire', 'lean']);
+    const at = lean.indexOf('\n');
+    const compactReceipt = JSON.parse(lean.slice(0, at));
+    assert.deepEqual(compactReceipt, [receipt.repository, receipt.commit, receipt.path, receipt.hash,
+      [receipt.startLine, receipt.endLine, receipt.totalLines], receipt.utf8Bytes, receipt.errors]);
+    assert.equal(lean.slice(at + 1), source);
+    const cached = JSON.parse(cli(['catalog', '--knownHash', envelope.catalogHash, '--wire', 'packed']));
+    assert.deepEqual(cached, { unchanged: true, total: 1 });
+    const otherScope = cli(['catalog', '--repository', 'different/repo', '--knownHash', envelope.catalogHash, '--wire', 'packed']);
+    assert.equal(JSON.parse(otherScope.split('\n')[0]).total, 0);
+    assert.equal(JSON.parse(otherScope.split('\n')[0]).unchanged, undefined);
+    const writer = new SkillStore(database);
+    writer.importFile({ repository: 'test/cli', commit: 'new', path: 'p/SKILL.md', packagePath: 'p', kind: 'skill', content: Buffer.from(source + '\nNew snapshot') });
+    writer.close();
+    const changed = cli(['catalog', '--knownHash', envelope.catalogHash, '--wire', 'packed']);
+    const changedReceipt = JSON.parse(changed.split('\n')[0]);
+    assert.equal(changedReceipt.total, 2);
+    assert.notEqual(changedReceipt.catalogHash, envelope.catalogHash);
+    assert.equal(changedReceipt.unchanged, undefined);
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });

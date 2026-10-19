@@ -28,6 +28,8 @@ Run from the project directory (Node 24+):
   node src/cli.ts resolve --handle s1 --catalogHash HASH [--repository owner/repo]
   node src/cli.ts catalog --wire text [--repository owner/repo]
   node src/cli.ts catalog --wire packed [--repository owner/repo]
+  node src/cli.ts catalog --wire packed --knownHash RETAINED_CATALOG_HASH
+  node src/cli.ts open --handle s1 --catalogHash HASH --wire lean
   node src/cli.ts open --handle s1 --catalogHash HASH --wire text [--repository owner/repo]
   node src/cli.ts open --handle s1 --catalogHash HASH --reference examples/guide.md --wire text
   node src/cli.ts inspect --file FILE_ID
@@ -43,12 +45,20 @@ Catalog/CLI is data access, not permission to execute downloaded skill scripts.`
   const db = new SkillStore(resolve(options.db || 'data/skillgraph.sqlite'));
   try {
     let result: unknown;
+    let cachedCatalog = false;
     if (command === 'stats') result = db.getStats();
     else if (command === 'catalog') {
-      const pageOptions = { repository: options.repository, offset: Number(options.offset || 0), maxTokens: Number(options.maxTokens || 8000) };
-      const page = options.format === 'full' ? db.catalog(pageOptions) : db.compactCatalog(pageOptions);
-      if (options.catalogHash && options.catalogHash !== page.catalogHash) throw Object.assign(new Error('Catalog changed; restart enumeration from offset 0.'), { code: 'STALE_CATALOG' });
-      result = page;
+      if (options.knownHash && Number(options.offset || 0) !== 0) throw Object.assign(new Error('--knownHash requires offset 0 and a fully retained catalog.'), { code: 'INVALID_ARGUMENT' });
+      const state = options.knownHash ? db.catalogState(options.repository) : undefined;
+      if (state && state.catalogHash === options.knownHash) {
+        result = { unchanged: true, total: state.total };
+        cachedCatalog = true;
+      } else {
+        const pageOptions = { repository: options.repository, offset: Number(options.offset || 0), maxTokens: Number(options.maxTokens || 8000) };
+        const page = options.format === 'full' ? db.catalog(pageOptions) : db.compactCatalog(pageOptions);
+        if (options.catalogHash && options.catalogHash !== page.catalogHash) throw Object.assign(new Error('Catalog changed; restart enumeration from offset 0.'), { code: 'STALE_CATALOG' });
+        result = page;
+      }
     } else if (command === 'open') {
       result = db.openHandle(options.handle || '', options.catalogHash || '', {
         repository: options.repository, reference: options.reference,
@@ -66,7 +76,13 @@ Catalog/CLI is data access, not permission to execute downloaded skill scripts.`
       const { text, numberedText, ...receipt } = db.readLines(options.file || '', Number(options.start || 1), Number(options.end), options.hash);
       result = options.numbered === 'true' ? { ...receipt, numberedText } : { ...receipt, text };
     } else throw Object.assign(new Error(`Unknown command: ${command}`), { code: 'INVALID_COMMAND' });
-    if (options.wire === 'packed') {
+    if (cachedCatalog) console.log(JSON.stringify(result));
+    else if (options.wire === 'lean') {
+      if (command !== 'open') throw Object.assign(new Error('--wire lean is supported for open only.'), { code: 'INVALID_ARGUMENT' });
+      const r = result as ReturnType<SkillStore['openHandle']>;
+      process.stdout.write(JSON.stringify([r.repository, r.commit, r.path, r.hash,
+        [r.startLine, r.endLine, r.totalLines], r.utf8Bytes, r.errors]) + '\n' + r.text);
+    } else if (options.wire === 'packed') {
       if (command !== 'catalog') throw Object.assign(new Error('--wire packed is supported for compact catalogs only.'), { code: 'INVALID_ARGUMENT' });
       process.stdout.write(packedCatalog(result as ReturnType<SkillStore['compactCatalog']>, Number(options.maxTokens || 8000)));
     } else if (options.wire === 'text') {
