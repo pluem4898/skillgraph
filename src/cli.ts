@@ -1,5 +1,6 @@
 import { resolve } from 'node:path';
 import { SkillStore } from './core.ts';
+import { packedCatalog } from './wire.ts';
 
 export function parseArgs(args: string[]) {
   const options: Record<string, string> = {};
@@ -26,6 +27,7 @@ Run from the project directory (Node 24+):
   node src/cli.ts catalog --offset NEXT --catalogHash HASH [--repository owner/repo]
   node src/cli.ts resolve --handle s1 --catalogHash HASH [--repository owner/repo]
   node src/cli.ts catalog --wire text [--repository owner/repo]
+  node src/cli.ts catalog --wire packed [--repository owner/repo]
   node src/cli.ts open --handle s1 --catalogHash HASH --wire text [--repository owner/repo]
   node src/cli.ts open --handle s1 --catalogHash HASH --reference examples/guide.md --wire text
   node src/cli.ts inspect --file FILE_ID
@@ -64,7 +66,10 @@ Catalog/CLI is data access, not permission to execute downloaded skill scripts.`
       const { text, numberedText, ...receipt } = db.readLines(options.file || '', Number(options.start || 1), Number(options.end), options.hash);
       result = options.numbered === 'true' ? { ...receipt, numberedText } : { ...receipt, text };
     } else throw Object.assign(new Error(`Unknown command: ${command}`), { code: 'INVALID_COMMAND' });
-    if (options.wire === 'text') {
+    if (options.wire === 'packed') {
+      if (command !== 'catalog') throw Object.assign(new Error('--wire packed is supported for compact catalogs only.'), { code: 'INVALID_ARGUMENT' });
+      process.stdout.write(packedCatalog(result as ReturnType<SkillStore['compactCatalog']>, Number(options.maxTokens || 8000)));
+    } else if (options.wire === 'text') {
       if (command === 'catalog') {
         const page = result as ReturnType<SkillStore['compactCatalog']>;
         process.stdout.write(JSON.stringify({ catalogHash: page.catalogHash, offset: page.offset, returned: page.returned, total: page.total, nextOffset: page.nextOffset, format: page.format }) + '\n' + page.text);

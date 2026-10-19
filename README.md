@@ -49,23 +49,25 @@ Original source bytes, line endings, and line coordinates are preserved. Binary 
 Prefer a raw text wire and a combined resolve/read when selecting an original skill:
 
 ```powershell
-node src/cli.ts catalog --repository OWNER/REPO --wire text --maxTokens 8000
+node src/cli.ts catalog --repository OWNER/REPO --wire packed --maxTokens 8000
 node src/cli.ts open --repository OWNER/REPO --handle s1 --catalogHash DIGEST --wire text
 node src/cli.ts open --repository OWNER/REPO --handle s1 --catalogHash DIGEST --reference examples/guide.md --wire text
 ```
 
-Catalog text wire returns a JSON page receipt followed by unescaped JSONL entries. Source text wire returns a JSON provenance receipt followed by exact original bytes, including original line endings. Verify `utf8Bytes` before treating a source response as complete. `open` defaults to the whole selected file; optional `--start` and `--end` address original line ranges. Known references stay within the selected package and commit. Old JSON commands remain supported; `resolve` is useful when headings and resolved links are actually needed.
+Packed catalog wire returns a JSON receipt/schema followed by `[name, description, overrides?]` JSONL rows. Row i (zero based) has handle `s` + (`handleStart` + i). Its path is `overrides.path`, or `defaults.pathPrefix + name + defaults.pathSuffix`; diagnostics are `overrides.errors` or `defaults.errors`. Names and descriptions remain exact. Nonconventional paths and nonempty diagnostics are explicit exceptions. The complete packed response is token-budget checked, and only whole entries are paged. `--wire text` retains explicit handles and paths. Source text wire returns a JSON provenance receipt followed by exact original bytes, including original line endings. Verify `utf8Bytes` before treating a source response as complete. `open` defaults to the whole selected file; optional `--start` and `--end` address original line ranges. Known references stay within the selected package and commit. Old JSON commands remain supported; `resolve` is useful when headings and resolved links are actually needed.
 
 On the three-task local pilot, rerunning real CLI access while preserving identical source and reference text produced:
 
-| Task | Earlier SkillGraph | Optimized SkillGraph | Direct-file index baseline |
-|---|---:|---:|---:|
-| Brand CSS | 3,675 | 3,080 | 2,971 |
-| Weekly update with reference | 5,605 | 3,729 | 3,586 |
-| Form repair | 3,981 | 3,450 | 3,365 |
-| Total | 13,261 | 10,259 | 9,922 |
+| Task | Earlier SkillGraph | Combined read + text | Packed catalog + combined read | Original direct-file baseline |
+|---|---:|---:|---:|---:|
+| Brand CSS | 3,675 | 3,080 | 2,832 | 2,971 |
+| Weekly update with reference | 5,605 | 3,729 | 3,481 | 3,586 |
+| Form repair | 3,981 | 3,450 | 3,202 | 3,365 |
+| Total | 13,261 | 10,259 | 9,515 | 9,922 |
 
-These are separately encoded skill-data response tokens using o200k_base, not total model usage. The optimized total is 22.64% smaller than the earlier SkillGraph path and still 3.40% above the direct-file baseline. The output artifacts passed 34 final acceptance checks per arm in the preceding single-agent pilot. This optimization replay verified exact guide/reference equality and does not constitute independent model A/B evaluation or a new task-quality experiment. Current software validation passes 29 tests, including commit-pinned direct reference reads and exact text-wire CLI bytes.
+These are separately encoded skill-data response tokens using o200k_base, not total model usage. The packed total is 4.10% below the unchanged original direct-file baseline and 28.25% below the earlier SkillGraph path. All 20 real catalog rows were decoded and compared for exact equality, including paths and diagnostics. The output artifacts passed 34 final acceptance checks per arm in the preceding single-agent pilot and on recheck. This optimization replay verified exact guide/reference equality and does not constitute independent model A/B evaluation or a new task-quality experiment. Current software validation passes 31 tests, including commit-pinned reads, exact text bytes, packed round trips and whole-entry budgeting. The same factoring could be applied to a direct-file index; this is a serialization improvement, not proof of a unique algorithmic advantage or universal savings across corpora.
+
+Command arguments, tool schemas, SkillGraph's own workflow instructions and format-decoding instructions are excluded from these response-only totals. Their costs must be included before claiming lower end-to-end model usage; the modest response saving alone does not establish that claim.
 
 ## Measured corpus
 
