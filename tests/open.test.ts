@@ -69,3 +69,31 @@ test('text-wire CLI returns a verifiable receipt and exact unescaped original by
     assert.equal(changedReceipt.unchanged, undefined);
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });
+
+test('batch CLI frames complete Unicode sources and emits nothing on a later invalid handle', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'skillgraph-batch-'));
+  const database = join(dir, 'test.sqlite');
+  const store = new SkillStore(database);
+  const sources = ['---\r\nname: first\r\ndescription: Full first\r\n---\r\nไทย without final newline',
+    '---\nname: second\ndescription: Full second\n---\nJSON-looking {"count":0}\n'];
+  for (let n = 0; n < sources.length; n++) store.importFile({ repository: 'test/batch', commit: 'fixed', path: `${n}/SKILL.md`, packagePath: String(n), kind: 'skill', content: Buffer.from(sources[n]) });
+  const catalog = store.compactCatalog();
+  const expected = ['s1', 's2'].map(handle => store.openHandle(handle, catalog.catalogHash).text);
+  store.close();
+  const run = (handles: string) => spawnSync(process.execPath, ['src/cli.ts', 'open-many', '--handles', handles, '--catalogHash', catalog.catalogHash, '--wire', 'lean', '--db', database], { windowsHide: true });
+  try {
+    const result = run('s1,s2'); assert.equal(result.status, 0, result.stderr.toString());
+    const bytes = result.stdout; let cursor = 0;
+    const line = () => { const end = bytes.indexOf(10, cursor); assert.ok(end >= cursor); const data = JSON.parse(bytes.subarray(cursor, end).toString()); cursor = end + 1; return data; };
+    assert.deepEqual(line(), { format: 'sources-v1', count: 2 });
+    for (const source of expected) {
+      const receipt = line();
+      assert.equal(receipt[5], Buffer.byteLength(source));
+      assert.equal(bytes.subarray(cursor, cursor + receipt[5]).toString(), source);
+      cursor += receipt[5]; assert.equal(bytes[cursor++], 10);
+    }
+    assert.equal(cursor, bytes.length);
+    const invalid = run('s1,s99'); assert.equal(invalid.status, 1); assert.equal(invalid.stdout.length, 0);
+    const duplicate = run('s1,s1'); assert.equal(duplicate.status, 1); assert.equal(duplicate.stdout.length, 0);
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});

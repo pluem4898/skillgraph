@@ -1,4 +1,16 @@
 import { SkillStoreError, tokenize, type CatalogPage } from './core.ts';
+import type { SkillStore } from './core.ts';
+
+export function leanSource(r: ReturnType<SkillStore['openHandle']>): string {
+  return JSON.stringify([r.repository, r.commit, r.path, r.hash,
+    [r.startLine, r.endLine, r.totalLines], r.utf8Bytes, r.errors]) + '\n' + r.text;
+}
+
+/** Each body is byte-framed by its receipt; the trailing separator is not source. */
+export function leanBatch(sources: ReturnType<SkillStore['openHandle']>[]): string {
+  return JSON.stringify({ format: 'sources-v1', count: sources.length }) + '\n' +
+    sources.map(source => leanSource(source) + '\n').join('');
+}
 
 /** Lossless catalog factoring. Handles follow row ordinals; conventional paths
  * and empty diagnostics are declared once. Exceptions remain explicit. */

@@ -1,6 +1,6 @@
 import { resolve } from 'node:path';
 import { SkillStore } from './core.ts';
-import { packedCatalog } from './wire.ts';
+import { packedCatalog, leanSource, leanBatch } from './wire.ts';
 
 export function parseArgs(args: string[]) {
   const options: Record<string, string> = {};
@@ -30,6 +30,7 @@ Run from the project directory (Node 24+):
   node src/cli.ts catalog --wire packed [--repository owner/repo]
   node src/cli.ts catalog --wire packed --knownHash RETAINED_CATALOG_HASH
   node src/cli.ts open --handle s1 --catalogHash HASH --wire lean
+  node src/cli.ts open-many --handles s1,s2,s3 --catalogHash HASH --wire lean
   node src/cli.ts open --handle s1 --catalogHash HASH --wire text [--repository owner/repo]
   node src/cli.ts open --handle s1 --catalogHash HASH --reference examples/guide.md --wire text
   node src/cli.ts inspect --file FILE_ID
@@ -59,6 +60,12 @@ Catalog/CLI is data access, not permission to execute downloaded skill scripts.`
         if (options.catalogHash && options.catalogHash !== page.catalogHash) throw Object.assign(new Error('Catalog changed; restart enumeration from offset 0.'), { code: 'STALE_CATALOG' });
         result = page;
       }
+    } else if (command === 'open-many') {
+      const handles = (options.handles || '').split(',');
+      if (handles.some(handle => !/^s[1-9][0-9]*$/.test(handle)) || new Set(handles).size !== handles.length || options.reference || options.start || options.end) {
+        throw Object.assign(new Error('Provide distinct --handles s1,s2; open-many reads complete skills. Read a specific reference with open.'), { code: 'INVALID_ARGUMENT' });
+      }
+      result = handles.map(handle => db.openHandle(handle, options.catalogHash || '', { repository: options.repository }));
     } else if (command === 'open') {
       result = db.openHandle(options.handle || '', options.catalogHash || '', {
         repository: options.repository, reference: options.reference,
@@ -78,10 +85,9 @@ Catalog/CLI is data access, not permission to execute downloaded skill scripts.`
     } else throw Object.assign(new Error(`Unknown command: ${command}`), { code: 'INVALID_COMMAND' });
     if (cachedCatalog) console.log(JSON.stringify(result));
     else if (options.wire === 'lean') {
-      if (command !== 'open') throw Object.assign(new Error('--wire lean is supported for open only.'), { code: 'INVALID_ARGUMENT' });
-      const r = result as ReturnType<SkillStore['openHandle']>;
-      process.stdout.write(JSON.stringify([r.repository, r.commit, r.path, r.hash,
-        [r.startLine, r.endLine, r.totalLines], r.utf8Bytes, r.errors]) + '\n' + r.text);
+      if (command === 'open-many') process.stdout.write(leanBatch(result as ReturnType<SkillStore['openHandle']>[]));
+      else if (command === 'open') process.stdout.write(leanSource(result as ReturnType<SkillStore['openHandle']>));
+      else throw Object.assign(new Error('--wire lean is supported for open and open-many.'), { code: 'INVALID_ARGUMENT' });
     } else if (options.wire === 'packed') {
       if (command !== 'catalog') throw Object.assign(new Error('--wire packed is supported for compact catalogs only.'), { code: 'INVALID_ARGUMENT' });
       process.stdout.write(packedCatalog(result as ReturnType<SkillStore['compactCatalog']>, Number(options.maxTokens || 8000)));
