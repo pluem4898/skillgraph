@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
+<title id="title">SkillGraph complete discovery and measured evidence delivery</title><desc id="desc">All skill names and descriptions stay visible. Original sources remain available by hash and line. An optional summary reduced model input by 89.67 percent in one synthetic inventory task repeated twice per arm.</desc>
+<rect width="1280" height="640" rx="24" fill="#0c1625"/>
+<g font-family="Segoe UI,Arial,sans-serif">
+<text x="68" y="83" fill="#7dd3fc" font-size="18" letter-spacing="3">SKILLS · SOURCE LINES · TOKEN MEASUREMENT</text>
+<text x="64" y="166" fill="#ffffff" font-size="72" font-weight="700">SkillGraph</text>
+<text x="68" y="215" fill="#d2deec" font-size="27">Complete discovery. Original sources. Measured overhead.</text>
+<g fill="#14263b" stroke="#36516e"><rect x="68" y="264" width="350" height="130" rx="14"/><rect x="465" y="264" width="350" height="130" rx="14"/><rect x="862" y="264" width="350" height="130" rx="14"/></g>
+<g fill="#7dd3fc" font-size="16"><text x="92" y="296">01  ENUMERATE</text><text x="489" y="296">02  CHOOSE</text><text x="886" y="296">03  READ</text></g>
+<g fill="white" font-size="23" font-weight="600"><text x="92" y="335">Full names and descriptions</text><text x="489" y="335">The agent selects a skill</text><text x="886" y="335">Exact original source lines</text></g>
+<g fill="#b6c8dc" font-size="17"><text x="92" y="366">Every entry in the declared scope</text><text x="489" y="366">Snapshot bound short handles</text><text x="886" y="366">Hash verified source access</text></g>
+<path d="M426 330h28m-8-7 8 7-8 7M823 330h28m-8-7 8 7-8 7" fill="none" stroke="#7dd3fc" stroke-width="2"/>
+<text x="68" y="459" fill="#7dd3fc" font-size="17">OPTIONAL EVIDENCE SUMMARY PILOT</text>
+<text x="68" y="514" fill="white" font-size="40" font-weight="700">151,573 → 15,662 input tokens</text>
+<text x="898" y="514" fill="#86efac" font-size="43" font-weight="700">−89.67%</text>
+<text x="68" y="558" fill="#c4d2e3" font-size="18">One synthetic inventory task · Two repeats per arm · All four answers correct</text>
+<text x="68" y="591" fill="#91a8c1" font-size="16">Evidence delivery only. This is not a universal skill or workflow saving.</text>
+</g></svg>
