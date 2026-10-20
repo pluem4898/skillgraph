@@ -1,14 +1,41 @@
-<p align="center"><img src="docs/assets/overview.svg" alt="SkillGraph complete discovery and measured evidence delivery" width="100%"></p>
+<p align="center"><strong>English</strong></p>
 
-<p align="center"><a href="#quick-start">Quick start</a> · <a href="#measured-results">Results</a> · <a href="docs/model-usage-study.md">Real model experiment</a> · <a href="docs/catalog-study.md">Detailed comparisons</a> · <a href=".agents/skills/skillgraph/SKILL.md">Skill instructions</a></p>
+<h1 align="center">SkillGraph: Complete Skill Discovery</h1>
 
-# SkillGraph
+<h3 align="center">Every skill visible. Original sources accessible. Token costs measured.</h3>
 
-**Complete agent skill discovery, exact original source lines, and reproducible token measurements.**
+<p align="center"><strong>Let the agent choose from full names and descriptions, then read exact source lines.</strong></p>
+
+<p align="center">
+  <a href="package.json"><img src="https://img.shields.io/badge/prototype-v0.1.0-7c3aed" alt="Prototype version 0.1.0"></a>
+  <a href="#quick-start"><img src="https://img.shields.io/badge/Node.js-24%2B-339933?logo=nodedotjs&amp;logoColor=white" alt="Requires Node.js 24 or newer"></a>
+  <a href=".agents/skills/skillgraph/SKILL.md"><img src="https://img.shields.io/badge/agent_skill-project_local-2563eb" alt="Project-local agent skill"></a>
+  <a href="#verify-and-reproduce"><img src="https://img.shields.io/badge/local_tests-36_passed-15803d" alt="36 local tests passed; not a CI status"></a>
+  <a href="docs/model-usage-study.md"><img src="https://img.shields.io/badge/model_pilot-4_calls-0e7490" alt="Real model pilot with four calls"></a>
+  <a href="docs/model-usage-results.json"><img src="https://img.shields.io/badge/results-per_run_data-d97706" alt="Per-run measurement data available"></a>
+</p>
+
+<p align="center">
+  <a href=".agents/skills/skillgraph/SKILL.md"><strong>Skill instructions</strong></a> ·
+  <a href="docs/model-usage-study.md"><strong>Experiment</strong></a> ·
+  <a href="docs/model-usage-results.json"><strong>Raw measurements</strong></a>
+</p>
+
+<p align="center">
+  <a href="#quick-start">Quick start</a> ·
+  <a href="#how-it-works">How it works</a> ·
+  <a href="#measured-results">Results</a> ·
+  <a href="#optional-evidence-summaries">Evidence views</a> ·
+  <a href="#faq">FAQ</a> ·
+  <a href="docs/catalog-study.md">Documentation</a>
+</p>
+
+<p align="center"><code>git clone https://github.com/pluem4898/skillgraph.git</code></p>
+
+> [!IMPORTANT]
+> **Read the result with its scope.** The 89.67% input reduction comes from one synthetic evidence-summary task, repeated twice per method. It is not a universal skill or whole-workflow saving. This is a source prototype, not a published npm package. The test badge reports the latest local run, not GitHub Actions.
 
 Keep every skill name and full description visible within a declared scope. Let the agent choose a skill, then read its original instructions with source hashes and line coordinates. Compact transport reduces repeated identifiers; optional evidence views compute explicit summaries before data reaches the model.
-
-Experimental project · Node.js 24+ · CLI first · Optional inspection viewer
 
 ## Measured results
 
@@ -115,6 +142,24 @@ The catalog study covers **40,545 occurrences**, with **40,541 readable targets*
 Start with the small pinned import. For a fair comparison, use the same task, corpus and model settings in both arms. Count every call, retry and required reference; keep answer failures in the results. [Report a reproducible issue](https://github.com/pluem4898/skillgraph/issues/new/choose), including cases where overhead outweighs savings.
 
 If this helps your work, share [the repository](https://github.com/pluem4898/skillgraph) with people building agent skill libraries or studying context costs. Independent reproductions and counterexamples are welcome.
+
+## FAQ
+
+**Does SkillGraph hide skills to save tokens?**
+
+No. Within the declared imported scope, catalog enumeration preserves every full name and description. Follow every page before final selection. A context limit must be reported explicitly.
+
+**Is the 89.67% reduction real model usage?**
+
+Yes, for the documented synthetic inventory pilot. CLI usage was 151,573 input tokens per raw call and 15,662 per focused call. All four answers matched the independent oracle. General skill-selection quality and whole-workflow savings remain unproven.
+
+**Do I need a web server or an npm package?**
+
+No web server is needed for the CLI skill. Clone this repository and install its dependencies. There is no published SkillGraph npm installation command. The web viewer is optional.
+
+**Can I reproduce the experiment?**
+
+The [model study](docs/model-usage-study.md) and [evidence study](docs/evidence-study.md) describe the required fixture and commands. Actual model calls need supported CLI authentication and consume account usage. The local paper and private executable evidence are not distributed.
 
 ## Project layout
 
