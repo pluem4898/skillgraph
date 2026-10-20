@@ -91,7 +91,13 @@ node scripts/smoke-cli.ts --repository anthropics/skills
 node src/cli.ts catalog --repository anthropics/skills --wire packed --maxTokens 8000
 ```
 
-Open the checkout as your Codex project and invoke `$skillgraph`. The [project-local skill](.agents/skills/skillgraph/SKILL.md) is included; it is not installed globally.
+SkillGraph uses a provider-neutral [Agent Skills entry point](.agents/skills/skillgraph/SKILL.md). Tool-capable agents can read it and run the CLI. In Codex, open the checkout and invoke `$skillgraph`. For Claude Code, Gemini CLI or cross-project installation, install into your host's documented skill directory:
+
+```text
+node scripts/install-skill.ts --target ABSOLUTE_SKILLS_DIRECTORY
+```
+
+Keep the checkout; the installed skill points to its runtime and database. See [agent compatibility and tested status](docs/compatibility.md). Automatic selection is host-dependent. Claude and Gemini model workflows have not yet been tested; the recorded model pilot used Codex CLI.
 
 Follow every `nextOffset` using the same scope and `catalogHash` before final selection. Replace these placeholders with CLI values:
 
