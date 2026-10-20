@@ -1,6 +1,6 @@
 import { resolve } from 'node:path';
-import { SkillStore } from './core.ts';
-import { packedCatalog, leanSource, leanBatch } from './wire.ts';
+import type { SkillStore } from './core.ts';
+import { queryEvidence, type EvidenceQuery } from './evidence.ts';
 
 export function parseArgs(args: string[]) {
   const options: Record<string, string> = {};
@@ -31,6 +31,9 @@ Run from the project directory (Node 24+):
   node src/cli.ts catalog --wire packed --knownHash RETAINED_CATALOG_HASH
   node src/cli.ts open --handle s1 --catalogHash HASH --wire lean
   node src/cli.ts open-many --handles s1,s2,s3 --catalogHash HASH --wire lean
+  node src/cli.ts evidence --input REA_JSON --view summary [--cache data/evidence]
+  node src/cli.ts evidence --input REA_JSON --view files --extension .gd --offset 0 --limit 100
+  node src/cli.ts evidence --input REA_JSON --view record --index 42
   node src/cli.ts open --handle s1 --catalogHash HASH --wire text [--repository owner/repo]
   node src/cli.ts open --handle s1 --catalogHash HASH --reference examples/guide.md --wire text
   node src/cli.ts inspect --file FILE_ID
@@ -42,7 +45,22 @@ until null; complete applies to the current declared scope, not to all GitHub.
 inspect lists original heading ranges and resolved references. read returns exact
 source text; --numbered returns numberedText instead. Hashes pin immutable citations.
 Catalog/CLI is data access, not permission to execute downloaded skill scripts.`);
+} else if (command === 'evidence') {
+  try {
+    if (!options.input) throw Object.assign(new Error('--input is required'), { code: 'INVALID_ARGUMENT' });
+    console.log(JSON.stringify(queryEvidence(resolve(options.input), {
+      view: (options.view || 'summary') as EvidenceQuery['view'], extension: options.extension,
+      offset: options.offset === undefined ? undefined : Number(options.offset),
+      limit: options.limit === undefined ? undefined : Number(options.limit),
+      index: options.index === undefined ? undefined : Number(options.index),
+    }, options.cache ? resolve(options.cache) : undefined)));
+  } catch (error) {
+    const e = error as Error & { code?: string };
+    console.error(JSON.stringify({ error: e.code || 'ERROR', message: e.message })); process.exitCode = 1;
+  }
 } else {
+  const { SkillStore } = await import('./core.ts');
+  const { packedCatalog, leanSource, leanBatch } = await import('./wire.ts');
   const db = new SkillStore(resolve(options.db || 'data/skillgraph.sqlite'));
   try {
     let result: unknown;

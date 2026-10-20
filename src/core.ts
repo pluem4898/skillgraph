@@ -45,9 +45,9 @@ export class SkillStoreError extends Error {
   }
 }
 
-const encoder = getEncoding('o200k_base');
+let encoder: ReturnType<typeof getEncoding> | undefined;
 /** Count arbitrary source text, including literal token-control strings, as ordinary text. */
-export function tokenize(text: string): number { return encoder.encode(text, [], []).length; }
+export function tokenize(text: string): number { return (encoder ??= getEncoding('o200k_base')).encode(text, [], []).length; }
 const sha256 = (content: string | Uint8Array) => createHash('sha256').update(content).digest('hex');
 
 /** Source lines retain their original CRLF/LF/CR terminators; no phantom line after EOF. */

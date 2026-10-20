@@ -2,6 +2,14 @@
 
 A CLI-first skill registry for complete discovery, original source reads, and reproducible token measurement. The optional web viewer is a separate inspection tool; the skill requires no web server.
 
+**Measured optional evidence views:** 647,269 → 111,424 data-response tokens
+(82.79% less) on two real recorded REA inventories; a reproducible authored demo
+measured 77.08% less. These are explicit evidence projections, not a catalog
+compression percentage or measured whole-model usage. See the
+[results, quality findings, runtime costs and reproduction instructions](docs/evidence-study.md)
+and [machine-readable measurements](docs/evidence-results.json). The 36-test local
+suite passes; an independent model-quality A/B result is not claimed.
+
 ## Use the skill
 
 Open this directory as your Codex project. The project-local skill is [.agents/skills/skillgraph/SKILL.md](.agents/skills/skillgraph/SKILL.md). Invoke `$skillgraph` in that project, or give an agent the skill file explicitly. It is not installed into your global skills directory.

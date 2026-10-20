@@ -1,0 +1,855 @@
+{
+  "schemaVersion": 1,
+  "measurementDateLocal": "2026-10-20 Asia/Bangkok",
+  "runtime": "v24.11.0",
+  "platform": "win32",
+  "reaVersion": "6.7.0",
+  "encoding": "o200k_base",
+  "metric": "Serialized stdout data-response tokens; not provider usage",
+  "realData": {
+    "cases": [
+      {
+        "case": 1,
+        "inputSha256": "115766bec8e62731839800a3236552ed3446e058da2183cc241453af6570b89f",
+        "pathInterpretationDisagreement": false,
+        "rawHeaderFiles": 1341,
+        "pythonPlatformFiles": 1341,
+        "rawHeaderDirectories": 0,
+        "pythonPlatformDirectories": 0,
+        "oracleSha256": "db898a4eecee6d42109510b6ad153156aa1075be7c4bdc49136172c0d285213d",
+        "queries": 8,
+        "checkedRecords": 2792,
+        "rawReportOnce": {
+          "tokens": 601708,
+          "wallMs": 100.26430000000005,
+          "cpuMs": 93,
+          "peakRssKiB": 56560
+        },
+        "producerColdViewMs": [
+          17.753099999999904,
+          16.13259999999991,
+          14.935099999999693,
+          23.05690000000004,
+          14.215699999999742,
+          13.344700000000103,
+          12.803399999999783,
+          15.295799999999872
+        ],
+        "producerWarmViewMs": [
+          5.646500000000287,
+          5.99559999999974,
+          5.940099999999802,
+          6.13130000000001,
+          5.882599999999911,
+          5.755900000000111,
+          5.127999999999702,
+          5.981299999999919
+        ],
+        "modes": [
+          {
+            "mode": "focused-no-cache",
+            "requests": 10,
+            "tokens": 99731,
+            "totalWallMs": 1782.3189999999995,
+            "totalCpuMs": 1695,
+            "peakRssKiB": 75208,
+            "responses": [
+              {
+                "query": {
+                  "view": "summary"
+                },
+                "responseTokens": 283,
+                "wallMs": 183.0643,
+                "cpuMs": 234,
+                "peakRssKiB": 72012
+              },
+              {
+                "query": {
+                  "view": "extensions"
+                },
+                "responseTokens": 273,
+                "wallMs": 173.3053,
+                "cpuMs": 155,
+                "peakRssKiB": 73120
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".gd",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 1358,
+                "wallMs": 172.23379999999997,
+                "cpuMs": 156,
+                "peakRssKiB": 73736
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".dll",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 204,
+                "wallMs": 176.09109999999964,
+                "cpuMs": 156,
+                "peakRssKiB": 73500
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".py",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 204,
+                "wallMs": 176.60430000000042,
+                "cpuMs": 156,
+                "peakRssKiB": 73568
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".tscn",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 1840,
+                "wallMs": 175.64260000000013,
+                "cpuMs": 186,
+                "peakRssKiB": 73468
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".absent",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 205,
+                "wallMs": 188.17709999999988,
+                "cpuMs": 140,
+                "peakRssKiB": 73500
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "limit": 500,
+                  "offset": 0
+                },
+                "responseTokens": 35957,
+                "wallMs": 182.29709999999977,
+                "cpuMs": 186,
+                "peakRssKiB": 75208
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "limit": 500,
+                  "offset": 500
+                },
+                "responseTokens": 34815,
+                "wallMs": 178.37289999999985,
+                "cpuMs": 171,
+                "peakRssKiB": 74768
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "limit": 500,
+                  "offset": 1000
+                },
+                "responseTokens": 24592,
+                "wallMs": 176.53049999999985,
+                "cpuMs": 155,
+                "peakRssKiB": 75200
+              }
+            ]
+          },
+          {
+            "mode": "focused-cache-hit",
+            "requests": 10,
+            "tokens": 99731,
+            "totalWallMs": 1698.575499999999,
+            "totalCpuMs": 1881,
+            "peakRssKiB": 70720,
+            "responses": [
+              {
+                "query": {
+                  "view": "summary"
+                },
+                "responseTokens": 283,
+                "wallMs": 164.02520000000004,
+                "cpuMs": 249,
+                "peakRssKiB": 69948
+              },
+              {
+                "query": {
+                  "view": "extensions"
+                },
+                "responseTokens": 273,
+                "wallMs": 169.66960000000017,
+                "cpuMs": 280,
+                "peakRssKiB": 70128
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".gd",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 1358,
+                "wallMs": 173.70100000000002,
+                "cpuMs": 124,
+                "peakRssKiB": 70428
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".dll",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 204,
+                "wallMs": 166.48989999999958,
+                "cpuMs": 249,
+                "peakRssKiB": 70560
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".py",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 204,
+                "wallMs": 169.24179999999978,
+                "cpuMs": 155,
+                "peakRssKiB": 69968
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".tscn",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 1840,
+                "wallMs": 169.3042000000005,
+                "cpuMs": 140,
+                "peakRssKiB": 70428
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".absent",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 205,
+                "wallMs": 165.79729999999927,
+                "cpuMs": 139,
+                "peakRssKiB": 69980
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "limit": 500,
+                  "offset": 0
+                },
+                "responseTokens": 35957,
+                "wallMs": 175.22280000000046,
+                "cpuMs": 203,
+                "peakRssKiB": 70448
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "limit": 500,
+                  "offset": 500
+                },
+                "responseTokens": 34815,
+                "wallMs": 173.1206999999995,
+                "cpuMs": 124,
+                "peakRssKiB": 70720
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "limit": 500,
+                  "offset": 1000
+                },
+                "responseTokens": 24592,
+                "wallMs": 172.0029999999997,
+                "cpuMs": 218,
+                "peakRssKiB": 70688
+              }
+            ]
+          }
+        ],
+        "verified": true
+      },
+      {
+        "case": 2,
+        "inputSha256": "2bb433349948d3695014b42358f777a8a7687edce88f8626fac1f6f495da3016",
+        "pathInterpretationDisagreement": true,
+        "rawHeaderFiles": 100,
+        "pythonPlatformFiles": 99,
+        "rawHeaderDirectories": 0,
+        "pythonPlatformDirectories": 1,
+        "oracleSha256": "06e5ddf596540961ca805ca5fb216d8aef0bec6119621933c3bc80237f7c723f",
+        "queries": 8,
+        "checkedRecords": 352,
+        "rawReportOnce": {
+          "tokens": 45561,
+          "wallMs": 90.82230000000072,
+          "cpuMs": 46,
+          "peakRssKiB": 55328
+        },
+        "producerColdViewMs": [
+          5.228099999999358,
+          3.5247999999992317,
+          3.857699999999568,
+          4.155000000000655,
+          4.516299999999319,
+          3.540399999999863,
+          3.4025000000001455,
+          4.141999999999825
+        ],
+        "producerWarmViewMs": [
+          2.5486000000000786,
+          2.457399999999325,
+          3.023400000000038,
+          2.8166999999994005,
+          2.5931000000000495,
+          2.3419999999996435,
+          2.6972999999998137,
+          2.7145000000000437
+        ],
+        "modes": [
+          {
+            "mode": "focused-no-cache",
+            "requests": 8,
+            "tokens": 11693,
+            "totalWallMs": 1300.7767999999996,
+            "totalCpuMs": 1352,
+            "peakRssKiB": 69620,
+            "responses": [
+              {
+                "query": {
+                  "view": "summary"
+                },
+                "responseTokens": 278,
+                "wallMs": 165.09190000000035,
+                "cpuMs": 124,
+                "peakRssKiB": 69236
+              },
+              {
+                "query": {
+                  "view": "extensions"
+                },
+                "responseTokens": 300,
+                "wallMs": 162.8164999999999,
+                "cpuMs": 249,
+                "peakRssKiB": 69408
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".gd",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 340,
+                "wallMs": 163.308,
+                "cpuMs": 140,
+                "peakRssKiB": 69264
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".dll",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 574,
+                "wallMs": 163.3823000000002,
+                "cpuMs": 265,
+                "peakRssKiB": 69484
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".py",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 3253,
+                "wallMs": 166.95010000000002,
+                "cpuMs": 202,
+                "peakRssKiB": 69616
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".tscn",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 278,
+                "wallMs": 159.47509999999966,
+                "cpuMs": 108,
+                "peakRssKiB": 69468
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".absent",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 209,
+                "wallMs": 159.55029999999988,
+                "cpuMs": 109,
+                "peakRssKiB": 69620
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "limit": 500,
+                  "offset": 0
+                },
+                "responseTokens": 6461,
+                "wallMs": 160.20259999999962,
+                "cpuMs": 155,
+                "peakRssKiB": 69392
+              }
+            ]
+          },
+          {
+            "mode": "focused-cache-hit",
+            "requests": 8,
+            "tokens": 11693,
+            "totalWallMs": 1310.5872000000018,
+            "totalCpuMs": 1164,
+            "peakRssKiB": 69668,
+            "responses": [
+              {
+                "query": {
+                  "view": "summary"
+                },
+                "responseTokens": 278,
+                "wallMs": 163.6947999999993,
+                "cpuMs": 124,
+                "peakRssKiB": 69668
+              },
+              {
+                "query": {
+                  "view": "extensions"
+                },
+                "responseTokens": 300,
+                "wallMs": 160.60090000000037,
+                "cpuMs": 171,
+                "peakRssKiB": 69516
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".gd",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 340,
+                "wallMs": 162.27279999999973,
+                "cpuMs": 186,
+                "peakRssKiB": 69268
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".dll",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 574,
+                "wallMs": 166.09069999999883,
+                "cpuMs": 140,
+                "peakRssKiB": 69636
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".py",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 3253,
+                "wallMs": 170.14720000000125,
+                "cpuMs": 124,
+                "peakRssKiB": 69288
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".tscn",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 278,
+                "wallMs": 162.1840000000011,
+                "cpuMs": 124,
+                "peakRssKiB": 69332
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".absent",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 209,
+                "wallMs": 164.47270000000026,
+                "cpuMs": 140,
+                "peakRssKiB": 69388
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "limit": 500,
+                  "offset": 0
+                },
+                "responseTokens": 6461,
+                "wallMs": 161.1241000000009,
+                "cpuMs": 155,
+                "peakRssKiB": 69536
+              }
+            ]
+          }
+        ],
+        "verified": true
+      }
+    ],
+    "queriesPerMode": 16,
+    "checkedRecords": 3144,
+    "rawTokens": 647269,
+    "focusedTokens": 111424,
+    "reductionPercent": 82.78551884919561
+  },
+  "syntheticPublicDemo": {
+    "cases": [
+      {
+        "case": 1,
+        "inputSha256": "1e8712364b53db8b5104f9a8ff38fbe3a631259ed746ea143bea50a27f95816b",
+        "pathInterpretationDisagreement": false,
+        "rawHeaderFiles": 304,
+        "pythonPlatformFiles": 304,
+        "rawHeaderDirectories": 1,
+        "pythonPlatformDirectories": 1,
+        "oracleSha256": "26acf7145c1d24a99dfe0f67d78d07e932f9f3f61c4aa2326be04e9736dfd16c",
+        "queries": 8,
+        "checkedRecords": 1026,
+        "rawReportOnce": {
+          "tokens": 136401,
+          "wallMs": 97.79389999999995,
+          "cpuMs": 62,
+          "peakRssKiB": 55484
+        },
+        "producerColdViewMs": [
+          9.59739999999988,
+          6.627899999999954,
+          6.70049999999992,
+          6.4551000000001295,
+          5.981599999999844,
+          5.550200000000132,
+          6.923399999999901,
+          6.511899999999969
+        ],
+        "producerWarmViewMs": [
+          3.386299999999892,
+          3.094899999999825,
+          3.744299999999839,
+          3.170599999999922,
+          2.8541999999999916,
+          3.116899999999987,
+          3.3728000000000975,
+          3.4312999999999647
+        ],
+        "modes": [
+          {
+            "mode": "focused-no-cache",
+            "requests": 9,
+            "tokens": 31267,
+            "totalWallMs": 1500.8708000000004,
+            "totalCpuMs": 1572,
+            "peakRssKiB": 69680,
+            "responses": [
+              {
+                "query": {
+                  "view": "summary"
+                },
+                "responseTokens": 273,
+                "wallMs": 166.9384,
+                "cpuMs": 124,
+                "peakRssKiB": 69556
+              },
+              {
+                "query": {
+                  "view": "extensions"
+                },
+                "responseTokens": 217,
+                "wallMs": 172.87429999999995,
+                "cpuMs": 250,
+                "peakRssKiB": 69588
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".gd",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 6074,
+                "wallMs": 166.7170000000001,
+                "cpuMs": 140,
+                "peakRssKiB": 69520
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".gd",
+                  "limit": 100,
+                  "offset": 100
+                },
+                "responseTokens": 267,
+                "wallMs": 164.15469999999982,
+                "cpuMs": 265,
+                "peakRssKiB": 69388
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".dll",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 208,
+                "wallMs": 166.5055000000002,
+                "cpuMs": 202,
+                "peakRssKiB": 69664
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".py",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 5976,
+                "wallMs": 163.55690000000004,
+                "cpuMs": 140,
+                "peakRssKiB": 69492
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".tscn",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 209,
+                "wallMs": 164.36599999999999,
+                "cpuMs": 156,
+                "peakRssKiB": 69680
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".absent",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 209,
+                "wallMs": 165.9278000000004,
+                "cpuMs": 171,
+                "peakRssKiB": 69308
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "limit": 500,
+                  "offset": 0
+                },
+                "responseTokens": 17834,
+                "wallMs": 169.83019999999988,
+                "cpuMs": 124,
+                "peakRssKiB": 69360
+              }
+            ]
+          },
+          {
+            "mode": "focused-cache-hit",
+            "requests": 9,
+            "tokens": 31267,
+            "totalWallMs": 1495.3376000000003,
+            "totalCpuMs": 1569,
+            "peakRssKiB": 69648,
+            "responses": [
+              {
+                "query": {
+                  "view": "summary"
+                },
+                "responseTokens": 273,
+                "wallMs": 161.7420000000002,
+                "cpuMs": 140,
+                "peakRssKiB": 69648
+              },
+              {
+                "query": {
+                  "view": "extensions"
+                },
+                "responseTokens": 217,
+                "wallMs": 162.55130000000008,
+                "cpuMs": 186,
+                "peakRssKiB": 69460
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".gd",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 6074,
+                "wallMs": 167.04800000000023,
+                "cpuMs": 249,
+                "peakRssKiB": 69420
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".gd",
+                  "limit": 100,
+                  "offset": 100
+                },
+                "responseTokens": 267,
+                "wallMs": 164.15639999999985,
+                "cpuMs": 124,
+                "peakRssKiB": 69268
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".dll",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 208,
+                "wallMs": 163.41800000000012,
+                "cpuMs": 139,
+                "peakRssKiB": 69496
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".py",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 5976,
+                "wallMs": 174.82780000000002,
+                "cpuMs": 155,
+                "peakRssKiB": 69524
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".tscn",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 209,
+                "wallMs": 165.69129999999996,
+                "cpuMs": 218,
+                "peakRssKiB": 69504
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "extension": ".absent",
+                  "limit": 100,
+                  "offset": 0
+                },
+                "responseTokens": 209,
+                "wallMs": 166.77120000000014,
+                "cpuMs": 140,
+                "peakRssKiB": 69516
+              },
+              {
+                "query": {
+                  "view": "files",
+                  "limit": 500,
+                  "offset": 0
+                },
+                "responseTokens": 17834,
+                "wallMs": 169.1315999999997,
+                "cpuMs": 218,
+                "peakRssKiB": 69384
+              }
+            ]
+          }
+        ],
+        "verified": true
+      }
+    ],
+    "queriesPerMode": 8,
+    "checkedRecords": 1026,
+    "rawTokens": 136401,
+    "focusedTokens": 31267,
+    "reductionPercent": 77.07714752824393
+  },
+  "validation": {
+    "status": "passed",
+    "checks": [
+      {
+        "name": "automated-tests",
+        "status": "passed",
+        "exitCode": 0,
+        "testCount": 36,
+        "logSha256": "ce94738f593a675b7874ff7954d2dc409fed23c9348a10dbdf02dd50e839faa2"
+      },
+      {
+        "name": "typescript",
+        "status": "passed",
+        "exitCode": 0,
+        "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "browser-script-syntax",
+        "status": "passed",
+        "exitCode": 0,
+        "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "limitations": [
+    "Token counts cover stdout data responses, not model input/output usage, commands, schemas or reasoning.",
+    "Raw comparison delivers each full report only once, not once per question.",
+    "Projections answer declared inventory questions; they do not preserve all raw fields inline. Full source remains retained and hash-addressed.",
+    "Deterministic oracle agreement is not AI semantic accuracy or task-success equivalence for untested questions.",
+    "No-cache focused views are a strong baseline. Memoization is not expected to reduce their response tokens.",
+    "CLI timings include process startup; raw delivery and multi-query projection perform different amounts of host computation.",
+    "Warm producer timing includes input hashing and retained-source verification. It is measured once per query, not a statistical speed guarantee.",
+    "Peak RSS is per measured Node process, not a process-family memory measurement.",
+    "Only supplied ZIP artifacts are covered; selection bias and small sample size limit generalization."
+  ],
+  "codeSha256": {
+    "src/evidence.ts": "f92b4c20b2e400580f6b8a6e1e76572a8b07ef874de6453e091325564b0f09ef",
+    "src/core.ts": "5dbb9ec35c0ca6eccf2ba791f09888eb25acbb8c291900d3c49c339fe6d29ba0",
+    "src/cli.ts": "401765b7bdd1f61650150fdb3b48d73b949c0edfc17e27e86c7df89c0e4a7e7b",
+    "scripts/evidence-study.ts": "a09c62debc570e994bce2e6409d7a4c106db8bcaea8fdb636cd89bee50cbe65e",
+    "scripts/zip-oracle.py": "ee68c14cc3f4600d1d2c9621e87add9cb2e6c1278b979ea965e3079d39d60dc5",
+    "scripts/make-evidence-demo.py": "e54480eb624e2cccc3e2eda72f588af6d54307227e2d31c8635a4b01ab2b7c4b"
+  }
+}
