@@ -1,0 +1,142 @@
+{
+  "scope": "Authored synthetic evidence-delivery task only; two repeats per arm; no automatic retries",
+  "results": [
+    {
+      "id": "authored-demo-1-raw",
+      "case": "authored-demo",
+      "repeat": 1,
+      "arm": "raw",
+      "requestedModel": "gpt-6-astra",
+      "reasoningEffort": "ultra",
+      "wallMs": 12600,
+      "exitCode": 0,
+      "error": null,
+      "promptSha256": "b1fe1d1ab98cc3317401458bd878975454ee8a1a120d29e7088e5f326cda74bb",
+      "promptBytes": 340892,
+      "usage": {
+        "input_tokens": 151573,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 221,
+        "reasoning_output_tokens": 140
+      },
+      "answer": {
+        "file_count": 304,
+        "directory_count": 1,
+        "declared_file_bytes": 11025,
+        "gd_count": 101,
+        "dll_count": 0,
+        "py_count": 100,
+        "root_sha256": "98de4cc259c37faf9eb471877464d815655c5fa641ffff50a01df14aac63c265"
+      },
+      "correct": true,
+      "toolItems": []
+    },
+    {
+      "id": "authored-demo-1-skillgraph",
+      "case": "authored-demo",
+      "repeat": 1,
+      "arm": "skillgraph",
+      "requestedModel": "gpt-6-astra",
+      "reasoningEffort": "ultra",
+      "wallMs": 8230,
+      "exitCode": 0,
+      "error": null,
+      "promptSha256": "d58550e8d5a4a067529e9d9ec10ad902c426fcabf8aa7013918e13ad2ceb5181",
+      "promptBytes": 2091,
+      "usage": {
+        "input_tokens": 15662,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 137,
+        "reasoning_output_tokens": 56
+      },
+      "answer": {
+        "file_count": 304,
+        "directory_count": 1,
+        "declared_file_bytes": 11025,
+        "gd_count": 101,
+        "dll_count": 0,
+        "py_count": 100,
+        "root_sha256": "98de4cc259c37faf9eb471877464d815655c5fa641ffff50a01df14aac63c265"
+      },
+      "correct": true,
+      "toolItems": []
+    },
+    {
+      "id": "authored-demo-2-skillgraph",
+      "case": "authored-demo",
+      "repeat": 2,
+      "arm": "skillgraph",
+      "requestedModel": "gpt-6-astra",
+      "reasoningEffort": "ultra",
+      "wallMs": 8252,
+      "exitCode": 0,
+      "error": null,
+      "promptSha256": "d58550e8d5a4a067529e9d9ec10ad902c426fcabf8aa7013918e13ad2ceb5181",
+      "promptBytes": 2091,
+      "usage": {
+        "input_tokens": 15662,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 179,
+        "reasoning_output_tokens": 98
+      },
+      "answer": {
+        "file_count": 304,
+        "directory_count": 1,
+        "declared_file_bytes": 11025,
+        "gd_count": 101,
+        "dll_count": 0,
+        "py_count": 100,
+        "root_sha256": "98de4cc259c37faf9eb471877464d815655c5fa641ffff50a01df14aac63c265"
+      },
+      "correct": true,
+      "toolItems": []
+    },
+    {
+      "id": "authored-demo-2-raw",
+      "case": "authored-demo",
+      "repeat": 2,
+      "arm": "raw",
+      "requestedModel": "gpt-6-astra",
+      "reasoningEffort": "ultra",
+      "wallMs": 12712,
+      "exitCode": 0,
+      "error": null,
+      "promptSha256": "b1fe1d1ab98cc3317401458bd878975454ee8a1a120d29e7088e5f326cda74bb",
+      "promptBytes": 340892,
+      "usage": {
+        "input_tokens": 151573,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 217,
+        "reasoning_output_tokens": 136
+      },
+      "answer": {
+        "file_count": 304,
+        "directory_count": 1,
+        "declared_file_bytes": 11025,
+        "gd_count": 101,
+        "dll_count": 0,
+        "py_count": 100,
+        "root_sha256": "98de4cc259c37faf9eb471877464d815655c5fa641ffff50a01df14aac63c265"
+      },
+      "correct": true,
+      "toolItems": []
+    }
+  ],
+  "cliVersion": "codex-cli 0.162.0-alpha.17.2",
+  "measuredAt": "2026-10-20",
+  "actualResolvedModel": "not reported by CLI events",
+  "probeUsage": {
+    "input_tokens": 15054,
+    "output_tokens": 28
+  },
+  "notes": [
+    "Probe excluded from paired comparisons; included in experimental overhead.",
+    "Cached input is a subset of input, reasoning output is a subset of output.",
+    "No tools, retries or failed inference calls occurred in the four paired runs.",
+    "Only authored synthetic fixture used; EXE-derived evaluation was not executed."
+  ]
+}

@@ -2,13 +2,20 @@
 
 A CLI-first skill registry for complete discovery, original source reads, and reproducible token measurement. The optional web viewer is a separate inspection tool; the skill requires no web server.
 
+**Real model usage pilot:** on one authored inventory task, two repeats per arm,
+CLI-reported input fell from 151,573 to 15,662 tokens per call (89.67% less).
+All four answers matched the independent ZIP oracle. This measures the optional
+evidence-delivery stage, not full skill discovery or general model quality.
+See [method, complete usage and limitations](docs/model-usage-study.md) and
+[per-run results](docs/model-usage-results.json).
+
 **Measured optional evidence views:** 647,269 → 111,424 data-response tokens
 (82.79% less) on two real recorded REA inventories; a reproducible authored demo
 measured 77.08% less. These are explicit evidence projections, not a catalog
 compression percentage or measured whole-model usage. See the
 [results, quality findings, runtime costs and reproduction instructions](docs/evidence-study.md)
 and [machine-readable measurements](docs/evidence-results.json). The 36-test local
-suite passes; an independent model-quality A/B result is not claimed.
+suite passes. The separate small model pilot above does not establish general quality equivalence.
 
 ## Use the skill
 
